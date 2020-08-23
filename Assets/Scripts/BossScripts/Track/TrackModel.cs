@@ -88,9 +88,12 @@ namespace BeastHunter
 
                 foreach (var behavior in _behaviorPool)
                 {
-                    if (behavior.IsActive && behavior.Timer > _trackData.TrackSettings.Lifetime)
+                    if (behavior.IsActive)
                     {
-                        DeactivateTracker(behavior);
+                        behavior.Updating();
+                        
+                        if (behavior.Timer > _trackData.TrackSettings.Lifetime)
+                            DeactivateTracker(behavior);
                     }
                 }
             }

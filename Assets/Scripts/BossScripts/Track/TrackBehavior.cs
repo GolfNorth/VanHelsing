@@ -3,7 +3,7 @@
 
 namespace BeastHunter
 {
-    public class TrackBehavior : MonoBehaviour
+    public class TrackBehavior : MonoBehaviour, IUpdate
     {
         #region Fields
 
@@ -60,11 +60,6 @@ namespace BeastHunter
             _isFound = false;
         }
 
-        private void Update()
-        {
-            _timer += Time.deltaTime;
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(_tracker))
@@ -83,6 +78,16 @@ namespace BeastHunter
                 _isFound = false;
                 _mesh.enabled = false;
             }
+        }
+
+        #endregion
+
+
+        #region IUpdate
+
+        public void Updating()
+        {
+            _timer += Time.deltaTime;
         }
 
         #endregion
