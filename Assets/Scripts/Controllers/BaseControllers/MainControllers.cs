@@ -53,6 +53,7 @@
         {
             Add(new NpcController(context));
             Add(new TrapController(context));
+            Add(new TrackController(context));
             //Add(new GiantMudCrabController(context));
             //Add(new RabbitController(context));
             Add(new TargetController(context));

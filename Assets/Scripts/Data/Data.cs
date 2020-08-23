@@ -26,6 +26,7 @@ namespace BeastHunter
         [SerializeField] private string _bossDataPath;
         [SerializeField] private string _trapDataPath;
         [SerializeField] private string _trapDataPath2;
+        [SerializeField] private string _trackDataPath;
 
         private static Data _instance;
         private static SphereData _sphereData;
@@ -45,6 +46,7 @@ namespace BeastHunter
         private static BossData _bossData;
         private static TrapData _trapData;
         private static TrapData _trapData2;
+        private static TrackData _trackData;
 
 
         #endregion
@@ -241,6 +243,18 @@ namespace BeastHunter
                     _trapData2 = Load<TrapData>("Data/" + Instance._trapDataPath2);
                 }
                 return _trapData2;
+            }
+        }
+
+        public static TrackData TrackData
+        {
+            get
+            {
+                if (_trackData == null)
+                {
+                    _trackData = Load<TrackData>("Data/" + Instance._trackDataPath);
+                }
+                return _trackData;
             }
         }
 

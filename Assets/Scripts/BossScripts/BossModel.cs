@@ -38,6 +38,8 @@ namespace BeastHunter
         public bool IsMoving { get; set; }
         public bool IsGrounded { get; set; }
         public bool IsPlayerNear { get; set; }
+        
+        public TrackInitializeController Track { get; set; }
 
         #endregion
 
@@ -175,6 +177,8 @@ namespace BeastHunter
 
             BossNavAgent.acceleration = BossSettings.NavMeshAcceleration;
             CurrentHealth = BossStats.BaseStats.HealthPoints;
+            
+            Track = new TrackInitializeController(context, Data.TrackData, prefab.transform);
         }
 
         #endregion
