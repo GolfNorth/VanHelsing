@@ -104,7 +104,7 @@ namespace BeastHunter
             {
                 gameObject = GameObject.Instantiate(prefab, position, rotation, parent);
                 var collider = gameObject.AddComponent<SphereCollider>();
-                collider.radius = _trackData.TrackSettings.ActivationRadius;
+                collider.radius = _trackData.TrackSettings.DetectionRadius;
                 collider.isTrigger = true;
                 var behavior = gameObject.AddComponent<TrackBehavior>();
                 behavior.Tracker = _trackData.TrackSettings.Tracker;

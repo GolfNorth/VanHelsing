@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace BeastHunter
@@ -18,13 +19,20 @@ namespace BeastHunter
 
         #endregion
         
+        
         #region Fields
 
+        [Tooltip("Track prefab")]
         [SerializeField] private GameObject _prefab;
+        [Tooltip("Track lifetime")]
         [SerializeField] private float _lifetime;
+        [Tooltip("Time between track spawn")]
         [SerializeField] private float _countdown;
-        [SerializeField] private float _activationRadius;
+        [Tooltip("Trace detection radius")]
+        [SerializeField] private float _detectionRadius;
+        [Tooltip("Time mesh")]
         [SerializeField] private Mesh _mesh;
+        [Tooltip("Who can find traces")]
         [SerializeField] private Trackers _tracker;
 
         #endregion
@@ -50,10 +58,10 @@ namespace BeastHunter
             set => _countdown = value;
         }
 
-        public float ActivationRadius
+        public float DetectionRadius
         {
-            get => _activationRadius;
-            set => _activationRadius = value;
+            get => _detectionRadius;
+            set => _detectionRadius = value;
         }
 
         public Mesh Mesh
