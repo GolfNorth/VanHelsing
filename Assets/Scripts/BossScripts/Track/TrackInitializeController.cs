@@ -22,6 +22,8 @@ namespace BeastHunter
             _context = context;
             _trackData = trackData;
             _owner = owner;
+
+            OnAwake();
         }
 
         #endregion
@@ -35,7 +37,7 @@ namespace BeastHunter
 
             var trackerModel = new TrackModel(_trackData, _owner, _holder.transform);
             
-            _context.TrackerModels.Add(_holder.GetInstanceID(), trackerModel);
+            _context.TrackModels.Add(_holder.GetInstanceID(), trackerModel);
         }
 
         #endregion
@@ -45,7 +47,7 @@ namespace BeastHunter
 
         public void TearDown()
         {
-            _context.TrackerModels.Remove(_holder.GetInstanceID());
+            _context.TrackModels.Remove(_holder.GetInstanceID());
             GameObject.Destroy(_holder);
         }
 

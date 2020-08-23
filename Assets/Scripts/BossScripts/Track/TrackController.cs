@@ -3,7 +3,7 @@
 
 namespace BeastHunter
 {
-    public class TrackController : IAwake, IUpdate
+    public class TrackController : IUpdate
     {
         #region Fields
 
@@ -17,16 +17,7 @@ namespace BeastHunter
         public TrackController(GameContext context)
         {
             _context = context;
-        }
-
-        #endregion
-
-
-        #region IAwake
-
-        public void OnAwake()
-        {
-            _context.TrackerModels = new Dictionary<int, TrackModel>();
+            _context.TrackModels = new Dictionary<int, TrackModel>();
         }
 
         #endregion
@@ -36,7 +27,7 @@ namespace BeastHunter
 
         public void Updating()
         {
-            foreach (var trackerModel in _context.TrackerModels)
+            foreach (var trackerModel in _context.TrackModels)
             {
                 trackerModel.Value.Execute();
             }

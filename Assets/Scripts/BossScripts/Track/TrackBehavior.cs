@@ -10,7 +10,9 @@ namespace BeastHunter
         private float _timer;
         private bool _isActive;
         private bool _isVisible;
+        private bool _isFound;
         private MeshRenderer _mesh;
+        private string _tracker;
 
         #endregion
 
@@ -21,7 +23,19 @@ namespace BeastHunter
 
         public bool IsActive => _isActive;
 
-        public bool IsVisible => _isVisible;
+        public bool IsFound => _isFound;
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => _isVisible = value;
+        }
+
+        public string Tracker
+        {
+            get => _tracker;
+            set => _tracker = value;
+        }
 
         #endregion
 
@@ -43,6 +57,7 @@ namespace BeastHunter
         private void OnDisable()
         {
             _isActive = false;
+            _isFound = false;
         }
 
         private void Update()
@@ -52,14 +67,20 @@ namespace BeastHunter
 
         private void OnTriggerEnter(Collider other)
         {
-            _isVisible = true;
-            _mesh.enabled = true;
+            if (other.CompareTag(_tracker))
+            {
+                _isFound = true;
+                _mesh.enabled = true;
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            _isVisible = false;
-            _mesh.enabled = false;
+            if (other.CompareTag(_tracker))
+            {
+                _isFound = false;
+                _mesh.enabled = false;
+            }
         }
 
         #endregion

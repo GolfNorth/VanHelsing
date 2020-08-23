@@ -8,7 +8,7 @@ namespace BeastHunter
     {
         #region Fields
         
-        private TrackSettings _trackSettings;
+        [SerializeField] private TrackSettings _trackSettings;
 
         #endregion
 

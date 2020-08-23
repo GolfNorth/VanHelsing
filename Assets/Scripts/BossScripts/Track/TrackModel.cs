@@ -16,6 +16,36 @@ namespace BeastHunter
         private readonly HashSet<TrackBehavior> _behaviorPool;
         private Vector3 _lastOwnerPosition;
         private float _countdown;
+        private bool _isVisible;
+        private bool _isFly;
+
+        #endregion
+        
+
+        #region Properties
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible != value)
+                {
+                    foreach (var behavior in _behaviorPool)
+                    {
+                        behavior.IsVisible = value;
+                    }
+
+                    _isVisible = value;
+                }
+            }
+        }
+
+        public bool IsFly
+        {
+            get => _isFly;
+            set => _isFly = value;
+        }
 
         #endregion
         
@@ -41,24 +71,27 @@ namespace BeastHunter
 
         public void Execute()
         {
-            _countdown -= Time.deltaTime;
-
-            if (_countdown <= 0)
+            if (!_isFly)
             {
-                if (_lastOwnerPosition != _owner.position)
+                _countdown -= Time.deltaTime;
+
+                if (_countdown <= 0)
                 {
-                    SpawnTracker(_prefab, _owner.position, _owner.rotation, _holder);
+                    if (_lastOwnerPosition != _owner.position)
+                    {
+                        SpawnTracker(_prefab, _owner.position, _owner.rotation, _holder);
+                    }
+
+                    _countdown = _trackData.TrackSettings.Countdown;
+                    _lastOwnerPosition = _owner.position;
                 }
 
-                _countdown = _trackData.TrackSettings.Countdown;
-                _lastOwnerPosition = _owner.position;
-            }
-
-            foreach (var behavior in _behaviorPool)
-            {
-                if (behavior.IsActive && behavior.Timer > _trackData.TrackSettings.Lifetime)
+                foreach (var behavior in _behaviorPool)
                 {
-                    DeactivateTracker(behavior);
+                    if (behavior.IsActive && behavior.Timer > _trackData.TrackSettings.Lifetime)
+                    {
+                        DeactivateTracker(behavior);
+                    }
                 }
             }
         }
@@ -74,12 +107,15 @@ namespace BeastHunter
                 collider.radius = _trackData.TrackSettings.ActivationRadius;
                 collider.isTrigger = true;
                 var behavior = gameObject.AddComponent<TrackBehavior>();
+                behavior.Tracker = _trackData.TrackSettings.Tracker;
                 _behaviorPool.Add(behavior);
             }
             else
             {
                 gameObject = _inactiveBehaviors.Dequeue().gameObject;
                 gameObject.SetActive(true);
+                gameObject.transform.position = position;
+                gameObject.transform.rotation = rotation;
             }
 
             return gameObject;

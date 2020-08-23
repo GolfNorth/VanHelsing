@@ -29,4 +29,4 @@ MonoBehaviour:
   _bossDataPath: BossData
   _trapDataPath: Trap
   _trapDataPath2: Trap2
-
+  _trackDataPath: TrackData

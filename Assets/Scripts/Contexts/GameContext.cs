@@ -22,7 +22,7 @@ namespace BeastHunter
         public QuestJournalModel QuestJournalModel;
         public Dictionary<int, NpcModel> NpcModels;
         public Dictionary<int, TrapModel> TrapModels;
-        public Dictionary<int, TrackModel> TrackerModels;
+        public Dictionary<int, TrackModel> TrackModels;
         //public TrapModel TrapModel;
         //public TrapsList TrapsList;
 
