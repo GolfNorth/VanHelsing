@@ -70,7 +70,9 @@ namespace BeastHunter
             if (other.CompareTag(_tracker))
             {
                 _isFound = true;
-                _mesh.enabled = true;
+                
+                if (_isVisible)
+                    _mesh.enabled = true;
             }
         }
 

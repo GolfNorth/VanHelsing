@@ -179,6 +179,8 @@ namespace BeastHunter
             CurrentHealth = BossStats.BaseStats.HealthPoints;
             
             Track = new TrackInitializeController(context, Data.TrackData, prefab.transform);
+            // Temporarily. Must be activated by the player.
+            context.TrackModels[prefab.GetInstanceID()].IsVisible = true;
         }
 
         #endregion

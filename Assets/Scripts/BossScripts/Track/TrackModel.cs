@@ -108,6 +108,7 @@ namespace BeastHunter
                 collider.isTrigger = true;
                 var behavior = gameObject.AddComponent<TrackBehavior>();
                 behavior.Tracker = _trackData.TrackSettings.Tracker;
+                behavior.IsVisible = _isVisible;
                 _behaviorPool.Add(behavior);
             }
             else
